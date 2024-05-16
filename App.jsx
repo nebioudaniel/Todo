@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
@@ -37,6 +36,14 @@ const App = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  // Clear all completed todos
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  // Count completed todos
+  const completedCount = todos.filter((todo) => todo.completed).length;
+
   return (
     <div className="App">
       <h1>To-Do List</h1>
@@ -46,6 +53,10 @@ const App = () => {
         toggleComplete={toggleComplete}
         deleteTodo={deleteTodo}
       />
+      <div className="footer">
+        <p>{completedCount} completed</p>
+        <button onClick={clearCompleted}>Clear Completed</button>
+      </div>
     </div>
   );
 };
